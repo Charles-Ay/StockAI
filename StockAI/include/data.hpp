@@ -4,13 +4,12 @@
 #include<vector>
 #include<iostream>
 #include "util.hpp"
-#include "convert_date.hpp"
+#include "date.hpp"
 
 namespace data {
-	using namespace util;
 	class data {
 		//date info
-		date d;
+		date trade_date;
 
 		//stock info
 		std::string name;
@@ -27,19 +26,31 @@ namespace data {
 		std::vector<data>* moves;
 		
 	public:
-		data();
+		/// <summary>
+		/// initialize data
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="ticker"></param>
+		/// <param name="open"></param>
+		/// <param name="close"></param>
+		/// <param name="high"></param>
+		/// <param name="low"></param>
+		/// <param name="volume"></param>
+		data(std::string, std::string, money_t, money_t, money_t, money_t, volume_t);
 		~data();
+
+		data(data* d);
 
 		/// <summary>
 		/// add to moves vector
 		/// </summary>
 		/// <param name="">move to add</param>
-		constexpr void add_moves(data*);
+		void add_move(data*);
 		/// <summary>
 		/// get a day move
 		/// </summary>
 		/// <param name="">day index</param>
 		/// <returns></returns>
-		constexpr data* get_move(date);
+		constexpr data get_move(date);
 	};
 }

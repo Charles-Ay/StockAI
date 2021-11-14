@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\convert_date.hpp">
+    <ClInclude Include="include\date.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\data.hpp">
@@ -33,6 +33,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\data_handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

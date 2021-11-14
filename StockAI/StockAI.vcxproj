@@ -139,12 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\convert_date.hpp" />
+    <ClInclude Include="include\date.hpp" />
     <ClInclude Include="include\data.hpp" />
     <ClInclude Include="include\data_handler.hpp" />
     <ClInclude Include="include\util.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\data.cpp" />
     <ClCompile Include="src\data_handler.cpp" />
   </ItemGroup>

@@ -62,6 +62,15 @@ public:
 	constexpr year_t get_year() { return year; }
 	constexpr month_t get_month() { return month; }
 	constexpr day_t get_day() { return day; }
-	
-	contex
+
+	constexpr void set_date(year_t y, month_t m, day_t d) {
+		year = y;
+		month = m;
+		day = d;
+	}
 };
+inline bool operator==(date lhs, date rhs) {
+	if (lhs.get_year() == rhs.get_year() && lhs.get_month() == rhs.get_month() && lhs.get_day() == rhs.get_day())
+		return true;
+	return false;
+}
