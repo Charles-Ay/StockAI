@@ -1,2 +1,0 @@
-GroupId,GroupName,VpcId,Description,OwnerId,InboundRulesCount,OutboundRulesCount,Tags
-sg-0bed6e1ac01e1a6b5,WindowsAccess,vpc-0ddf7d73aa66d8641,launch-wizard-1 created 2021-11-12T20:16:03.608-05:00,082408782376,2,1,
