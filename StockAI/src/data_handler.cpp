@@ -24,7 +24,7 @@ void data::data_handler::read_moves_vector(std::string path) {
 		std::string line;//current line
 
 		bool lab = true;
-		while (getline(in, line))
+		while (getline(in, line))//read each line
 		{
 			Tokenizer tok(line);//seperate by line
 			vec.assign(tok.begin(), tok.end());//assign seprated line to a vector
@@ -40,8 +40,51 @@ void data::data_handler::read_moves_vector(std::string path) {
 				lab = false;
 			}
 			else {
+				date da;
 
+				//date
+				year_t year = 0;
+				month_t month = 0;
+				day_t day = 0;
+				std::string tmp = "";
 
+				bool y = true;
+				bool m = true;
+				bool d = true;
+
+				//seprate slash in string
+				std::string x = header[0];
+				while (string_contains(x, "\\")) {
+					if (year == 0 && x[0] != '\\') {
+						tmp += std::string(1, x[0]);
+						x = x.replace(0, 1, "");
+					}
+					else if (month == 0 && x[0] != '\\') {
+						tmp += std::string(1, x[0]);
+						x = x.replace(0, 1, "");
+					}
+					else if (day == 0 && x[0] != '\\') {
+						tmp += std::string(1, x[0]);
+						x = x.replace(0, 1, "");
+					}
+					else {
+						if (y) {
+							year = std::stoi(tmp);
+							tmp = "";
+							y = false;
+						}
+						else if (m) {
+							month = std::stoi(tmp);
+							tmp = "";
+							m = false;
+						}
+						else if (d) {
+							day = std::stoi(tmp);
+							tmp = "";
+							d = false;
+						}
+					}
+				}
 
 				copy(vec.begin(), vec.end(), std::back_inserter(vec2));//copy line to main vector
 			}
