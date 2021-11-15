@@ -51,6 +51,12 @@ namespace data {
 		/// </summary>
 		/// <param name="">day index</param>
 		/// <returns></returns>
-		constexpr data get_move(date);
+		data get_move(date);
+
+		/// <summary>
+		/// get the amount of trade days in the vector
+		/// </summary>
+		/// <returns>size of moves vector</returns>
+		constexpr size_t moves_vector_size();
 	};
 }

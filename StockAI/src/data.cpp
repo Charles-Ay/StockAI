@@ -32,9 +32,11 @@ data::data::~data(){
 
 void data::data::add_move(data* d) { moves->push_back(d); }
 
-constexpr data::data data::data::get_move(date d) {
+data::data data::data::get_move(date d) {
 	//O(n)
 	for (unsigned i = 0; i < moves->size(); ++i) {
 		if (moves->at(i).trade_date == d)return moves->at(i);
 	}
 }
+
+constexpr size_t data::data::moves_vector_size() { return moves->size(); }
