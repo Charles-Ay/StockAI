@@ -36,7 +36,7 @@ namespace data {
 		/// <param name="high"></param>
 		/// <param name="low"></param>
 		/// <param name="volume"></param>
-		data(std::string, std::string, money_t, money_t, money_t, money_t, volume_t);
+		data(std::string, std::string, date, money_t, money_t, money_t, money_t, volume_t);
 		~data();
 
 		data(data* d);

@@ -1,12 +1,13 @@
 #include "../include/data.hpp"
 #include<string>
 
-data::data::data(std::string name, std::string ticker, money_t open, money_t close, 
+data::data::data(std::string name, std::string ticker, date da, money_t open, money_t close, 
 	money_t high, money_t low, volume_t volume)
 {
 	moves = new std::vector<data>;
 	this->name = name;
 	this->ticker = ticker;
+	this->trade_date = da;
 	this->open = open;
 	this->close = close;
 	this->high = high;

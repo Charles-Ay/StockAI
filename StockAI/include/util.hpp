@@ -12,4 +12,20 @@ namespace util {
 	using volume_t = long long;
 
 	constexpr bool string_contains(std::string orig, std::string to_find) { return orig.find(to_find) != std::string::npos; }
+
+	/// <summary>
+	/// checks to see if data is valid.
+	/// </summary>
+	/// <param name="value">value to check</param>
+	/// <param name="type">type to compare to. accpetable types: int</param>
+	/// <returns></returns>
+	constexpr bool validate(std::string value, std::string type) {
+		if (type == "int") {
+			bool valid = true;
+			for (unsigned i = 0; i < value.size(); ++i) {
+				if (!isdigit(value[i]))return false;
+			}
+			return true;
+		}
+	}
 }

@@ -40,8 +40,6 @@ void data::data_handler::read_moves_vector(std::string path) {
 				lab = false;
 			}
 			else {
-				date da;
-
 				//date
 				year_t year = 0;
 				month_t month = 0;
@@ -85,6 +83,8 @@ void data::data_handler::read_moves_vector(std::string path) {
 						}
 					}
 				}
+				date n_date(year, month, day);
+
 
 				copy(vec.begin(), vec.end(), std::back_inserter(vec2));//copy line to main vector
 			}
@@ -97,9 +97,9 @@ void data::data_handler::read_moves_vector(std::string path) {
 void data::data_handler::split_data() {
 	//keep track of indexes used and fill other arrays without emptying data array
 	std::unordered_set<int> used_indexes;
-	int train_size = data_array->size() * TRAIN_SET_PERCENT;
-	int test_size = data_array->size() * TEST_SET_PERCENT;
-	int valid_size = data_array->size() * VALIDATION_SET_PERCENT;
+	int train_size = int(data_array->size() * TRAIN_SET_PERCENT);//cast for loss warning
+	int test_size = int(data_array->size() * TEST_SET_PERCENT);
+	int valid_size = int(data_array->size() * VALIDATION_SET_PERCENT);
 
 	//Training Data
 	int count = 0;
