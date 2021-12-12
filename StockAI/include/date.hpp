@@ -74,3 +74,23 @@ inline bool operator==(date lhs, date rhs) {
 		return true;
 	return false;
 }
+
+/// <summary>
+/// turn date into int value
+/// </summary>
+/// <param name="d">date to parse</param>
+/// <returns>date int val</returns>
+int parseDate(date &d) {
+	return 10000 * d.get_year() + 100 * d.get_month() + d.get_day();
+}
+
+/// <summary>
+/// turn date into int value
+/// </summary>
+/// <param name="year"></param>
+/// <param name="month"></param>
+/// <param name="day"></param>
+/// <returns>date int val</returns>
+int parseDate(year_t year, month_t month, day_t day) {
+	return 10000 * year + 100 * month + day;
+}
