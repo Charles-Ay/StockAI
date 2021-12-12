@@ -16,7 +16,7 @@ int main()
     data::data_handler hand;
     hand.read_moves_vector(path);
 
-    for (int i = 0; i < hand.v.size(); ++i) {
+    for (int i = 0; i < hand.size(); ++i) {
         if (i % 6 == 0)cout << endl;
         cout << vec[i] << " ";
     }
