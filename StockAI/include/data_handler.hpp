@@ -13,7 +13,7 @@
 #include <algorithm>    // copy
 #include <iterator>     // ostream_operator
 #include <boost/tokenizer.hpp>
-
+#include <algorithm>
 
 
 //class used to read data, split data
@@ -51,7 +51,8 @@ namespace data {
 		/// read moves headers
 		/// </summary>
 		/// <param name="path">the path to data</param>
-		void read_moves_headers(std::string path);
+		
+		//void read_moves_headers(std::string path);
 		/// <summary>
 		/// split data according to corresponding percentages
 		/// </summary>

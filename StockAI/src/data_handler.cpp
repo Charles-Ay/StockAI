@@ -16,7 +16,7 @@ void data::data_handler::read_moves_vector(std::string path) {
 	using namespace boost;
 
 	std::ifstream in(path.c_str());//get file path
-	if (!in.is_open()) {
+	if (in.is_open()) {
 		typedef tokenizer< escaped_list_separator<char> > Tokenizer;//token seperator ','
 		std::vector<std::string> vec;//read vector
 		std::vector<std::string> vec2;//store vector
@@ -52,16 +52,17 @@ void data::data_handler::read_moves_vector(std::string path) {
 
 				//seprate slash in string
 				std::string x = header[0];
-				while (string_contains(x, "\\")) {
-					if (year == 0 && x[0] != '\\') {
+				//get date
+				while (string_contains(x, "-")) {
+					if (year == 0 && x[0] != '-') {
 						tmp += std::string(1, x[0]);
 						x = x.replace(0, 1, "");
 					}
-					else if (month == 0 && x[0] != '\\') {
+					else if (month == 0 && x[0] != '-') {
 						tmp += std::string(1, x[0]);
 						x = x.replace(0, 1, "");
 					}
-					else if (day == 0 && x[0] != '\\') {
+					else if (day == 0 && x[0] != '-') {
 						tmp += std::string(1, x[0]);
 						x = x.replace(0, 1, "");
 					}
@@ -85,11 +86,11 @@ void data::data_handler::read_moves_vector(std::string path) {
 				}
 				date n_date(year, month, day);
 
-
 				copy(vec.begin(), vec.end(), std::back_inserter(vec2));//copy line to main vector
+				header.insert(header.end(), vec.begin(), vec.end());
 			}
-			
 		}
+		//std::reverse(header.begin(), header.end());
 	}
 
 	
@@ -138,10 +139,9 @@ void data::data_handler::split_data() {
 			++count;
 		}
 	}
-	printf("Training Data Size: %ul.\n", training_data->size());
-	printf("Test Data Size: %ul.\n", test_data->size());
-	printf("Validation Data Size: %ul.\n", validation_data->size());
-
+	std::cout << "Training Data Size: " << training_data->size() << std::endl;
+	std::cout << "Test Data Size: " << training_data->size() << std::endl;
+	std::cout << "Validation Data Size: " << training_data->size() << std::endl;
 }
 
 

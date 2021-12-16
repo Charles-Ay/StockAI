@@ -1,5 +1,4 @@
 #include "../include/data.hpp"
-#include<string>
 
 data::data::data(std::string name, std::string ticker, date da, money_t open, money_t close, 
 	money_t high, money_t low, volume_t volume)
@@ -38,6 +37,7 @@ data::data data::data::get_move(date d) {
 	for (unsigned i = 0; i < moves->size(); ++i) {
 		if (moves->at(i).trade_date == d)return moves->at(i);
 	}
+	return nullptr;
 }
 
 constexpr size_t data::data::moves_vector_size() { return moves->size(); }

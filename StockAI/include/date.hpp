@@ -8,29 +8,13 @@ using namespace util;
 	@return pointer to the 3-letter month name as a c-string.
 	@param month [in] month number [1..12]
 */
-constexpr char const* month_name_short(month_t month) {
-	constexpr char const* const names[13] = {
-		"",
-		"JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-		"JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
-	};
-	return names[month];
-}
+constexpr char const* month_name_short(month_t month);
 
 /** Get the full name of the civil month.
 	@return pointer to the month name as a c-string.
 	@param month [in] month number [1..12]
 */
-constexpr char const* month_name_long(month_t month) {
-	constexpr char const* const names[13] = {
-		"",
-		"January", "February", "March", "April", "May", "June",
-		"July", "August", "September", "October", "November", "December"
-	};
-	return names[month];
-}
-
-enum month_val { JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC };
+constexpr char const* month_name_long(month_t month);
 
 /*
 * date layout:
@@ -47,9 +31,7 @@ enum month_val { JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC 
 /// <param name="year">year</param>
 /// <param name="month">month</param>
 /// <param name="day">day</param>
-constexpr double convert_to_day_num(int* year, int* month, int* day) {
-	return 0;
-}
+constexpr double convert_to_day_num(int* year, int* month, int* day);
 
 class date {
 	year_t year = 0;
@@ -69,6 +51,7 @@ public:
 		day = d;
 	}
 };
+
 inline bool operator==(date lhs, date rhs) {
 	if (lhs.get_year() == rhs.get_year() && lhs.get_month() == rhs.get_month() && lhs.get_day() == rhs.get_day())
 		return true;
@@ -80,9 +63,7 @@ inline bool operator==(date lhs, date rhs) {
 /// </summary>
 /// <param name="d">date to parse</param>
 /// <returns>date int val</returns>
-int parseDate(date &d) {
-	return 10000 * d.get_year() + 100 * d.get_month() + d.get_day();
-}
+year_t parseDate(date& d);
 
 /// <summary>
 /// turn date into int value
@@ -91,6 +72,7 @@ int parseDate(date &d) {
 /// <param name="month"></param>
 /// <param name="day"></param>
 /// <returns>date int val</returns>
-int parseDate(year_t year, month_t month, day_t day) {
-	return 10000 * year + 100 * month + day;
-}
+year_t parseDate(year_t year, month_t month, day_t day);
+
+
+enum month_val { JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC };
