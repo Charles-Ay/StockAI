@@ -6,7 +6,7 @@ int maths::cal_mean_x(const std::unordered_map<int, double>& data)
 	for (auto val : data) {
 		count += val.first;
 	}
-	return count/data.size();
+	return count/static_cast<int>(data.size());
 }
 
 double maths::cal_mean_y(const std::unordered_map<int, double>& data)
@@ -22,25 +22,25 @@ int maths::cal_std_deviation_x(const std::unordered_map<int, double>& data, cons
 {
 	int sum = 0;
 	for (auto val : data) {
-		sum += std::pow(val.first - xmean, 2);
+		sum += static_cast<int>(std::pow(val.first - xmean, 2));
 	}
-	return std::sqrt(sum / data.size());
+	return static_cast<int>(std::sqrt(sum / static_cast<int>(data.size())));
 }
 
-int maths::cal_std_deviation_y(const std::unordered_map<int, double>& data, const double& ymean)
+double maths::cal_std_deviation_y(const std::unordered_map<int, double>& data, const double& ymean)
 {
-	int sum = 0;
+	double sum = 0;
 	for (auto val : data) {
-		sum += std::pow(val.first - ymean, 2);
+		sum += std::pow(static_cast<double>(val.first) - ymean, 2.0);
 	}
-	return std::sqrt(sum / data.size());
+	return std::sqrt(sum / static_cast<double>(data.size()));
 }
 
 double maths::per_top(const std::unordered_map<int, double>& data, const int& xmean, const double& ymean)
 {
 	double total = 0;
 	for (auto val : data) {
-		total += (double(val.first) - xmean) * (val.second - ymean);
+		total += (static_cast<double>(val.first) - xmean) * (val.second - ymean);
 	}
 	return total;
 }
@@ -50,10 +50,10 @@ double maths::per_bot(const std::unordered_map<int, double>& data, const int &xm
 	int sumx = 0;
 	double sumy = 0;
 	for (auto val : data) {
-		sumx += std::pow(val.first - xmean, 2);
-		sumy += std::pow(val.second - ymean, 2);
+		sumx += static_cast<int>(std::pow(val.first - xmean, 2));
+		sumy += std::pow(val.second - ymean, 2.0);
 	}
-	return std::sqrt(sumx * sumy);
+	return std::sqrt(static_cast<double>(sumx) * sumy);
 }
 
 double maths::cal_per_corr(const std::unordered_map<int, double>& data, const int& xmean, const double& ymean)

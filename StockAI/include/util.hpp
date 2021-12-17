@@ -12,7 +12,7 @@ namespace util {
 	using volume_t = long long;
 
 	inline bool string_contains(std::string orig, std::string to_find) { return orig.find(to_find) != std::string::npos; }
-
+	
 	/// <summary>
 	/// checks to see if data is valid.
 	/// </summary>
@@ -28,4 +28,7 @@ namespace util {
 		}
 		return true;
 	}
+
+	inline money_t string_to_money(std::string s) { return std::stod(s); }
+	inline volume_t string_to_volume(std::string s) { return std::stoll(s); }
 }

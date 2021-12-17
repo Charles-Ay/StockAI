@@ -46,7 +46,7 @@ namespace data {
 		/// read moves data
 		/// </summary>
 		/// <param name="path">the path to data</param>
-		void read_moves_vector(std::string path);
+		void read_moves(std::string path);
 		/// <summary>
 		/// read moves headers
 		/// </summary>
@@ -60,6 +60,7 @@ namespace data {
 
 		//void count_classes();
 
+		//std::vector<data*>* get_all_data();
 		std::vector<data*>* get_training_data();
 		std::vector<data*>* get_test_data();
 		std::vector<data*>* get_validation_data();

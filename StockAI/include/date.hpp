@@ -4,6 +4,9 @@
 
 using namespace util;
 
+enum month_val { JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC };
+
+
 /** Get the short name of the civil month.
 	@return pointer to the 3-letter month name as a c-string.
 	@param month [in] month number [1..12]
@@ -46,10 +49,9 @@ public:
 	constexpr day_t get_day() { return day; }
 
 	constexpr void set_date(year_t y, month_t m, day_t d) {
-		year = y;
-		month = m;
-		day = d;
+		year = y; month = m; day = d;
 	}
+	friend inline std::ostream& operator<<(std::ostream& os, const date& dt);
 };
 
 inline bool operator==(date lhs, date rhs) {
@@ -74,5 +76,12 @@ year_t parseDate(date& d);
 /// <returns>date int val</returns>
 year_t parseDate(year_t year, month_t month, day_t day);
 
+date extract_date_from_string(std::string s);
 
-enum month_val { JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC };
+inline year_t string_to_year(std::string s) { return stoll(s); }
+inline month_t string_to_month(std::string s) { return stoi(s); }
+inline day_t string_to_day(std::string s) { return stoi(s); }
+inline std::ostream& operator<<(std::ostream& os, const date& dt) {
+	os << dt.year << '/' << dt.month << '/' << dt.day;
+	return os;
+}

@@ -30,3 +30,45 @@ year_t parseDate(date& d) {
 year_t parseDate(year_t year, month_t month, day_t day) {
 	return 10000 *year + static_cast<year_t>(year_t(100) * month + day);
 }
+
+
+date extract_date_from_string(std::string s) {
+	if (string_contains(s, "-")) {
+		bool y = true;
+		bool m = true;
+		bool d = true;
+
+		std::string yr;
+		std::string mo;
+		std::string da;
+
+		//need to find more efficent way to parse date
+		for (size_t i = 0; i < s.size(); ++i) {
+			if (y && s[i] != '-') yr += s[i];
+			else if(y){ y = false; ++i; }//increment to go to next index
+			if (m && !y && s[i] != '-') mo += s[i];
+			else if(!y)m = false;
+			if(!m && s[i] != '-')da += s[i];
+		}
+		return date(string_to_year(yr), string_to_month(mo), string_to_day(da));
+	}
+	else if (string_contains(s, "/")) {
+		bool y = true;
+		bool m = true;
+		bool d = true;
+
+		std::string yr;
+		std::string mo;
+		std::string da;
+
+		for (size_t i = 0; i < s.size(); ++i) {
+			if (y && s[i] != '/') yr += s[i];
+			else if (y) { y = false; ++i; }//increment to go to next index
+			if (m && !y && s[i] != '/') mo += s[i];
+			else if (!y)m = false;
+			if (!m && s[i] != '-')da += s[i];
+		}
+		return date(string_to_year(yr), string_to_month(mo), string_to_day(da));
+	}
+	else throw std::invalid_argument("Invalid date format");
+}

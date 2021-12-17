@@ -25,12 +25,29 @@ void testUnorderedList() {
 	}
 }
 
+//data test
+void data_3_arg_test() {
+	data::data_handler dh;
+	using namespace std::filesystem;
+	path p = current_path();
+	dh.read_moves(p.string() + "\\AAPL.csv");
+
+	data::data da("Apple", "AAPL", dh.header);
+
+	for (size_t i = 0; i < data::moves.size(); ++i) {
+		std::cout << data::moves.at(i) << std::endl;
+	}
+}
+
+
+
+
 //test if list output is good
 void testParsing() {
 	data::data_handler dh;
 	using namespace std::filesystem;
 	path p = current_path();
-	dh.read_moves_vector(p.string() + "\\AAPL.csv");
+	dh.read_moves(p.string() + "\\AAPL.csv");
 
 	for (size_t i = 0; i < dh.header.size(); ++i) {
 		std::cout << dh.header[i];
@@ -38,8 +55,8 @@ void testParsing() {
 		else std::cout << ", ";
 	}
 }
-
 int main(){
 	//testUnorderedList(); //passed
 	//testParsing(); //passed
+	//data_3_arg_test();//passed
 }

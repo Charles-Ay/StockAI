@@ -5,6 +5,9 @@
 #include<iostream>
 #include "util.hpp"
 #include "date.hpp"
+#include <ostream>
+#include <ostream>
+#include <ostream>
 
 namespace data {
 	class data {
@@ -12,18 +15,15 @@ namespace data {
 		date trade_date;
 
 		//stock info
-		std::string name;
-		std::string ticker;
-		
-		//value info
-		money_t open;
-		money_t close;
-		money_t high;
-		money_t low;
-		volume_t volume;
+		std::string name = "*uninitalized*";
+		std::string ticker = "*uninitalized*";
 
-		//store moves each day(open, close, high, low, volume)
-		std::vector<data>* moves;
+		//value info
+		money_t open = 0.0;
+		money_t close = 0.0;
+		money_t high = 0.0;
+		money_t low = 0.0;
+		volume_t volume = 0;
 		
 	public:
 		/// <summary>
@@ -38,6 +38,14 @@ namespace data {
 		/// <param name="volume"></param>
 		data(std::string, std::string, date, money_t, money_t, money_t, money_t, volume_t);
 		~data();
+
+		/// <summary>
+		/// initialize data
+		/// </summary>
+		/// <param name="name">stock name</param>
+		/// <param name="tick">stock ticker</param>
+		/// <param name="v">vector to convert to data</param>
+		data(const std::string& name, const std::string& tick, const std::vector<std::string>& v);
 
 		data(data* d);
 
@@ -54,9 +62,24 @@ namespace data {
 		data get_move(date);
 
 		/// <summary>
+		/// get move from a index
+		/// </summary>
+		/// <returns></returns>
+		data get_move_at_index(size_t i);
+
+		/// <summary>
 		/// get the amount of trade days in the vector
 		/// </summary>
 		/// <returns>size of moves vector</returns>
 		constexpr size_t moves_vector_size();
+		
+		/// <summary>
+		/// osteam overload
+		/// </summary>
+		friend std::ostream& operator<<(std::ostream& os, const data & d);
 	};
+	void reset_moves();
+
+	//store moves each day(open, close, high, low, volume)
+	inline std::vector<data> moves;
 }

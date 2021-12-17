@@ -12,7 +12,7 @@ data::data_handler::~data_handler() {
 }
 
 
-void data::data_handler::read_moves_vector(std::string path) {
+void data::data_handler::read_moves(std::string path) {
 	using namespace boost;
 
 	std::ifstream in(path.c_str());//get file path
@@ -84,7 +84,6 @@ void data::data_handler::read_moves_vector(std::string path) {
 						}
 					}
 				}
-				date n_date(year, month, day);
 
 				copy(vec.begin(), vec.end(), std::back_inserter(vec2));//copy line to main vector
 				header.insert(header.end(), vec.begin(), vec.end());
@@ -144,6 +143,11 @@ void data::data_handler::split_data() {
 	std::cout << "Validation Data Size: " << training_data->size() << std::endl;
 }
 
+
+//std::vector<data*>* data::data_handler::get_all_data()
+//{
+//	return nullptr;
+//}
 
 std::vector<data::data*>* data::data_handler::get_training_data() {
 	return training_data;

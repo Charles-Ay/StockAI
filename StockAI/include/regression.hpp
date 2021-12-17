@@ -29,7 +29,7 @@ namespace maths {
 	/// <param name="data">the map to use</param>
 	/// <param name="ymean">the mean of the y elements</param>
 	/// <returns></returns>
-	int cal_std_deviation_y(const std::unordered_map<int, double>& data, const double& ymean);
+	double cal_std_deviation_y(const std::unordered_map<int, double>& data, const double& ymean);
 
 
 	/// <summary>
