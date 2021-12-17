@@ -22,15 +22,25 @@ constexpr double convert_to_day_num(int* year, int* month, int* day) {
 	return 0;
 }
 
-year_t parseDate(date& d) {
+year_t date_to_number(date& d) {
 	int x = 100 * d.get_month();
 	return 10000 * d.get_year() + x + d.get_day();
 }
 
-year_t parseDate(year_t year, month_t month, day_t day) {
+year_t date_to_number(year_t year, month_t month, day_t day) {
 	return 10000 *year + static_cast<year_t>(year_t(100) * month + day);
 }
 
+date number_to_date(year_t num) {
+	year_t y = num / 10000;
+	double tmp = y - (num / 10000.0);
+	if (tmp < 0)tmp *= -1;
+	tmp *= 10000;
+	month_t m = tmp / 100;
+	tmp -= static_cast<double>(m * 100.0);
+	day_t d = ceil(tmp);
+	return date(y, m, d);
+}
 
 date extract_date_from_string(std::string s) {
 	if (string_contains(s, "-")) {

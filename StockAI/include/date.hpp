@@ -65,7 +65,7 @@ inline bool operator==(date lhs, date rhs) {
 /// </summary>
 /// <param name="d">date to parse</param>
 /// <returns>date int val</returns>
-year_t parseDate(date& d);
+year_t date_to_number(date& d);
 
 /// <summary>
 /// turn date into int value
@@ -74,8 +74,21 @@ year_t parseDate(date& d);
 /// <param name="month"></param>
 /// <param name="day"></param>
 /// <returns>date int val</returns>
-year_t parseDate(year_t year, month_t month, day_t day);
+year_t date_to_number(year_t year, month_t month, day_t day);
 
+/// <summary>
+/// turn a number into a formated date
+/// </summary>
+/// <param name="num">number to use</param>
+/// <returns></returns>
+date number_to_date(year_t num);
+
+
+/// <summary>
+/// extract a date class from a string
+/// </summary>
+/// <param name="s">string to extract from</param>
+/// <returns>a date class</returns>
 date extract_date_from_string(std::string s);
 
 inline year_t string_to_year(std::string s) { return stoll(s); }

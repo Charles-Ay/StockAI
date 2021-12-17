@@ -25,17 +25,50 @@ void testUnorderedList() {
 	}
 }
 
-//data test
-void data_3_arg_test() {
-	data::data_handler dh;
-	using namespace std::filesystem;
-	path p = current_path();
-	dh.read_moves(p.string() + "\\AAPL.csv");
+namespace date_test {
+	void date_to_number_test() {
+		date d(2021, 12, 16);
+		year_t y = date_to_number(d);//passed
+		std::cout << y << std::endl;
 
-	data::data da("Apple", "AAPL", dh.header);
+		y = date_to_number(2021, 12, 16);//passed
+		std::cout << y << std::endl;
+	}
 
-	for (size_t i = 0; i < data::moves.size(); ++i) {
-		std::cout << data::moves.at(i) << std::endl;
+	void number_to_date_test() {
+		year_t y = 20211216;
+		date d = number_to_date(y);
+		std::cout << d << std::endl;
+	}
+}
+
+namespace data_test {
+	void data_3_arg_test() {
+		data::data_handler dh;
+		using namespace std::filesystem;
+		path p = current_path();
+		dh.read_moves(p.string() + "\\AAPL.csv");
+
+		data::data da("Apple", "AAPL", dh.header);
+
+		for (size_t i = 0; i < data::moves.size(); ++i) {
+			std::cout << data::moves.at(i) << std::endl;
+		}
+	}
+
+	namespace data_handling_test {
+		void testParsing() {
+			data::data_handler dh;
+			using namespace std::filesystem;
+			path p = current_path();
+			dh.read_moves(p.string() + "\\AAPL.csv");
+
+			for (size_t i = 0; i < dh.header.size(); ++i) {
+				std::cout << dh.header[i];
+				if ((i + 1) % 6 == 0 && i > 0)std::cout << std::endl;
+				else std::cout << ", ";
+			}
+		}
 	}
 }
 
@@ -43,20 +76,11 @@ void data_3_arg_test() {
 
 
 //test if list output is good
-void testParsing() {
-	data::data_handler dh;
-	using namespace std::filesystem;
-	path p = current_path();
-	dh.read_moves(p.string() + "\\AAPL.csv");
 
-	for (size_t i = 0; i < dh.header.size(); ++i) {
-		std::cout << dh.header[i];
-		if ((i+1) % 6 == 0 && i > 0)std::cout << std::endl;
-		else std::cout << ", ";
-	}
-}
 int main(){
-	//testUnorderedList(); //passed
-	//testParsing(); //passed
-	//data_3_arg_test();//passed
+	testUnorderedList(); //passed
+	//data_test::data_handling_test::testParsing(); //passed
+	//data_test::data_3_arg_test(); //passed
+	//date_test::date_to_number_test(); //passed
+	//date_test::number_to_date_test();
 }
