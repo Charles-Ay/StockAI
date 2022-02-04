@@ -1,87 +1,90 @@
 #include "../include/regression.hpp"
 
-int maths::cal_mean_x(const std::unordered_map<int, double>& data)
+util::money_t maths::cal_mean_x(const std::unordered_map<util::money_t, util::year_t>& data)
 {
-	int count = 0;
+	util::money_t count = 0;
 	for (auto val : data) {
 		count += val.first;
 	}
-	return count/static_cast<int>(data.size());
+	return count/static_cast<util::money_t>(data.size());
 }
 
-double maths::cal_mean_y(const std::unordered_map<int, double>& data)
+util::year_t maths::cal_mean_y(const std::unordered_map<util::money_t, util::year_t>& data)
 {
-	double count = 0;
+	util::year_t count = 0;
 	for (auto val : data) {
 		count += val.second;
 	}
-	return count/data.size();
+	return count/static_cast<util::year_t>(data.size());
 }
 
-int maths::cal_std_deviation_x(const std::unordered_map<int, double>& data, const int& xmean)
+util::money_t maths::cal_std_deviation_x(const std::unordered_map<util::money_t, util::year_t>& data, const util::money_t& xmean)
 {
-	int sum = 0;
+	util::money_t sum = 0;
 	for (auto val : data) {
-		sum += static_cast<int>(std::pow(val.first - xmean, 2));
+		sum += std::pow(val.first - xmean, 2.0);
 	}
-	return static_cast<int>(std::sqrt(sum / static_cast<int>(data.size())));
+	return std::sqrt(sum / static_cast<util::money_t>(data.size()));
 }
 
-double maths::cal_std_deviation_y(const std::unordered_map<int, double>& data, const double& ymean)
+util::money_t maths::cal_std_deviation_y(const std::unordered_map<util::money_t, util::year_t>& data, const util::year_t& ymean)
 {
-	double sum = 0;
+	util::money_t sum = 0;
 	for (auto val : data) {
-		sum += std::pow(static_cast<double>(val.first) - ymean, 2.0);
+		sum += std::pow(val.first - ymean, 2);
 	}
-	return std::sqrt(sum / static_cast<double>(data.size()));
+	return std::sqrt(sum / static_cast<util::money_t>(data.size()));
 }
 
-double maths::per_top(const std::unordered_map<int, double>& data, const int& xmean, const double& ymean)
+util::money_t maths::per_top(const std::unordered_map<util::money_t, util::year_t>& data, const util::money_t& xmean, const util::year_t& ymean)
 {
-	double total = 0;
+	util::money_t total = 0;
 	for (auto val : data) {
-		total += (static_cast<double>(val.first) - xmean) * (val.second - ymean);
+		total += (val.first - xmean) * (val.second - static_cast<util::money_t>(ymean));
 	}
 	return total;
 }
 
-double maths::per_bot(const std::unordered_map<int, double>& data, const int &xmean, const double& ymean)
+util::money_t maths::per_bot(const std::unordered_map<util::money_t, util::year_t>& data, const util::money_t& xmean, const util::year_t& ymean)
 {
-	int sumx = 0;
-	double sumy = 0;
+	util::money_t sumx = 0;
+	util::year_t sumy = 0;
 	for (auto val : data) {
-		sumx += static_cast<int>(std::pow(val.first - xmean, 2));
-		sumy += std::pow(val.second - ymean, 2.0);
+		sumx += (std::pow(val.first - xmean, 2.0));
+		sumy += static_cast<util::year_t>(std::pow(val.second - ymean, 2));
 	}
-	return std::sqrt(static_cast<double>(sumx) * sumy);
+	return std::sqrt(static_cast<util::money_t>(sumx) * sumy);
 }
 
-double maths::cal_per_corr(const std::unordered_map<int, double>& data, const int& xmean, const double& ymean)
+util::money_t maths::cal_per_corr(const std::unordered_map<util::money_t, util::year_t>& data, const util::money_t& xmean, const util::year_t& ymean)
 {
 	return maths::per_top(data, xmean, ymean) / maths::per_bot(data, xmean, ymean);
 }
 
-double maths::reg_slope(const std::unordered_map<int, double>& data, const int& xmean, const double& ymean)
+util::money_t maths::reg_slope(const std::unordered_map<util::money_t, util::year_t>& data, const util::money_t& xmean, const util::year_t& ymean)
 {
 	return maths::cal_per_corr(data, xmean, ymean) * (maths::cal_std_deviation_x(data, xmean) / maths::cal_std_deviation_y(data, ymean));
 }
 
-double maths::reg_y_intercept(const std::unordered_map<int, double>& data, const int& xmean, const double& ymean)
+util::money_t maths::reg_y_intercept(const std::unordered_map<util::money_t, util::year_t>& data, const util::money_t& xmean, const util::year_t& ymean)
 {
 	return ymean - (maths::reg_slope(data, xmean, ymean) * xmean);
 }
 
-double maths::cal_regression(const std::unordered_map<int, double>& data)
+util::money_t maths::cal_regression(const std::unordered_map<util::money_t, util::year_t>& data)
 {
 	//y = a + b * x
-	int xmean = cal_mean_x(data);
-	double ymean = cal_mean_y(data);
+	util::money_t xmean = cal_mean_x(data);
+	util::year_t ymean = cal_mean_y(data);
 
-	std::unordered_map<int, double> reg;
+	util::money_t ret = 0;
+	//std::unordered_map<util::money_t, util::year_t> reg;
 
 	for (auto val : data) {
-		reg.insert(std::make_pair(val.first, maths::reg_y_intercept(data, xmean, ymean) + (maths::reg_slope(data, xmean, ymean) * val.first)));
+		ret += static_cast<util::year_t>(maths::reg_y_intercept(data, xmean, ymean) + (maths::reg_slope(data, xmean, ymean) * val.first));
+		//reg.insert(std::make_pair(val.first, static_cast<util::year_t>(maths::reg_y_intercept(data, xmean, ymean) + (maths::reg_slope(data, xmean, ymean) * val.first))));
 	}
-	return 0.0;
+
+	return ret;
 }
 

@@ -14,6 +14,7 @@
 #include <iterator>     // ostream_operator
 #include <boost/tokenizer.hpp>
 #include <algorithm>
+#include <unordered_map>
 
 
 //class used to read data, split data
@@ -64,6 +65,13 @@ namespace data {
 		std::vector<data*>* get_training_data();
 		std::vector<data*>* get_test_data();
 		std::vector<data*>* get_validation_data();
+
+		/// <summary>
+		/// parse date and price to a unordred map that will be used with regression
+		/// </summary>
+		/// <returns>map of prices and date</returns>
+		std::unordered_map<money_t, year_t> vector_parse();
+
 	};
 }
 

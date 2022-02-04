@@ -143,11 +143,21 @@ void data::data_handler::split_data() {
 	std::cout << "Validation Data Size: " << training_data->size() << std::endl;
 }
 
-
+//might be implemented in the future
 //std::vector<data*>* data::data_handler::get_all_data()
 //{
 //	return nullptr;
 //}
+
+std::unordered_map<money_t, year_t> data::data_handler::vector_parse() {
+	std::unordered_map<money_t, year_t> m;
+	for (auto val : moves) {
+		date d = val.get_date();
+		m.insert({ val.get_price_at_close(), date_to_number(d) });
+	}
+	return m;
+}
+
 
 std::vector<data::data*>* data::data_handler::get_training_data() {
 	return training_data;

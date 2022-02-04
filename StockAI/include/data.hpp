@@ -59,13 +59,7 @@ namespace data {
 		/// </summary>
 		/// <param name="">day index</param>
 		/// <returns></returns>
-		data get_move(date);
-
-		/// <summary>
-		/// get move from a index
-		/// </summary>
-		/// <returns></returns>
-		data get_move_at_index(size_t i);
+		data get_move_on_date(date);
 
 		/// <summary>
 		/// get the amount of trade days in the vector
@@ -77,6 +71,12 @@ namespace data {
 		/// osteam overload
 		/// </summary>
 		friend std::ostream& operator<<(std::ostream& os, const data & d);
+
+		constexpr money_t get_price_at_close() { return close; }
+		constexpr money_t get_price_at_open() { return open; }
+		inline date get_date() { return trade_date; }
+		constexpr volume_t get_volume() { return volume; }
+		constexpr std::string get_name() { return name; }
 	};
 	void reset_moves();
 

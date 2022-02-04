@@ -54,7 +54,7 @@ data::data::~data(){
 
 void data::data::add_move(data* d) { moves.push_back(d); }
 
-data::data data::data::get_move(date d) {
+data::data data::data::get_move_on_date(date d) {
 	//O(n)
 	for (unsigned i = 0; i < moves.size(); ++i) {
 		if (moves.at(i).trade_date == d)return moves.at(i);

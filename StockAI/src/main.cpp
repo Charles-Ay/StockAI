@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <boost/tokenizer.hpp>
 #include "../include/data_handler.hpp"
+#include "../include/regression.hpp"
 
 //test if list output is good
 void testUnorderedList() {
@@ -72,15 +73,28 @@ namespace data_test {
 	}
 }
 
+namespace reg_test {
+	void test_main_reg() {
+		data::data_handler dh;
+		using namespace std::filesystem;
+		path p = current_path();
+		dh.read_moves(p.string() + "\\AAPL.csv");
+
+		data::data da("Apple", "AAPL", dh.header);
+
+		std::cout << "REGRESSION: " << maths::cal_regression(dh.vector_parse()) << std::endl;
+	}
+}
 
 
 
 //test if list output is good
 
 int main(){
-	testUnorderedList(); //passed
+	//testUnorderedList(); //passed
 	//data_test::data_handling_test::testParsing(); //passed
 	//data_test::data_3_arg_test(); //passed
 	//date_test::date_to_number_test(); //passed
 	//date_test::number_to_date_test();
+	reg_test::test_main_reg();
 }
