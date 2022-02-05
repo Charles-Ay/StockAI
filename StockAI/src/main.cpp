@@ -80,9 +80,14 @@ namespace reg_test {
 		path p = current_path();
 		dh.read_moves(p.string() + "\\AAPL.csv");
 
+<<<<<<< Updated upstream
 		data::data da("Apple", "AAPL", dh.header);
 
 		std::cout << "REGRESSION: " << maths::cal_regression(dh.vector_parse()) << std::endl;
+=======
+		dh.reparse_header(dh);
+
+>>>>>>> Stashed changes
 	}
 }
 

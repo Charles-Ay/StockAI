@@ -31,4 +31,17 @@ namespace util {
 
 	inline money_t string_to_money(std::string s) { return std::stod(s); }
 	inline volume_t string_to_volume(std::string s) { return std::stoll(s); }
+<<<<<<< Updated upstream
+=======
+
+	inline std::map <std::string, std::string> saved_names({
+		{"AAPL", "Apple"} });
+
+	inline std::string derive_name(const std::string &tick) {
+		for (auto n : saved_names) {
+			if (n.first == tick)return n.second;
+		}
+		throw new std::invalid_argument(tick + " not known");
+	}
+>>>>>>> Stashed changes
 }

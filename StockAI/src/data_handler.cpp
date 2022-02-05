@@ -28,6 +28,12 @@ void data::data_handler::read_moves(std::string path) {
 		{
 			Tokenizer tok(line);//seperate by line
 			vec.assign(tok.begin(), tok.end());//assign seprated line to a vector
+<<<<<<< Updated upstream
+=======
+			//get ticker and name
+			tick = path.substr(path.find_last_of("\\") + 1, path.substr(path.find_last_of(".") + 1).size() + 1);
+			name = derive_name(tick);
+>>>>>>> Stashed changes
 
 			//get headers
 			if (lab) {
