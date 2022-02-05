@@ -28,6 +28,9 @@ void data::data_handler::read_moves(std::string path) {
 		{
 			Tokenizer tok(line);//seperate by line
 			vec.assign(tok.begin(), tok.end());//assign seprated line to a vector
+			//get ticker and name
+			tick = path.substr(path.find_last_of(".") + 1);
+			name = derive_name(tick);
 
 			//get headers
 			if (lab) {
@@ -157,6 +160,20 @@ std::vector<data::data*>* data::data_handler::get_test_data() {
 }
 std::vector<data::data*>* data::data_handler::get_validation_data() {
 	return validation_data;
+}
+
+std::vector<data::data*> data::data_handler::reparse_header(const data_handler& dh)
+{
+	std::vector<data> vec;
+	auto cpy = dh;
+	while (cpy.header.size() > 0) {
+		vec.push_back(data(cpy.name, cpy.tick, cpy.header));
+		int r = 0;
+		while (r < 6) {
+			cpy.header.erase(cpy.header.begin());
+		}
+	}
+	return std::vector<data*>();
 }
 
 

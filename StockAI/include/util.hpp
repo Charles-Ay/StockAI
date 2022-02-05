@@ -1,6 +1,8 @@
 #pragma once
 
+#include <map>
 #include<string>
+#include <stdexcept>
 namespace util {
 	//data values
 	using day_t = int;
@@ -12,7 +14,7 @@ namespace util {
 	using volume_t = long long;
 
 	inline bool string_contains(std::string orig, std::string to_find) { return orig.find(to_find) != std::string::npos; }
-	
+
 	/// <summary>
 	/// checks to see if data is valid.
 	/// </summary>
@@ -31,4 +33,14 @@ namespace util {
 
 	inline money_t string_to_money(std::string s) { return std::stod(s); }
 	inline volume_t string_to_volume(std::string s) { return std::stoll(s); }
+
+	std::map <std::string, std::string> saved_names({
+		{"APPL", "Apple"} });
+
+	inline std::string derive_name(const std::string &tick) {
+		for (auto n : saved_names) {
+			if (n.first == tick)return n.second;
+		}
+		throw std::invalid_argument(tick + " not known");
+	}
 }

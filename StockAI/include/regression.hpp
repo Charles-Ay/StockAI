@@ -80,6 +80,6 @@ namespace maths {
 	/// calculate the simple linear regression
 	/// </summary>
 	/// <param name="data">map to use</param>
-	/// <returns>regressionLine?</returns>
+	/// <returns>regressionLine</returns>
 	double cal_regression(const std::unordered_map<int, double>& data);
 }

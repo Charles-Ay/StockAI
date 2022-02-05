@@ -5,7 +5,6 @@
 #include <algorithm>    // copy
 #include <iterator>     // ostream_operator
 #include <unordered_map>
-#include <boost/tokenizer.hpp>
 #include "../include/data_handler.hpp"
 
 //test if list output is good
@@ -69,6 +68,41 @@ namespace data_test {
 				else std::cout << ", ";
 			}
 		}
+
+		void tempout() {
+			data::data_handler dh;
+			using namespace std::filesystem;
+			path p = current_path();
+			dh.read_moves(p.string() + "\\AAPL.csv");
+
+			int cnt = 1;
+			int cn2 = 1;
+			for (size_t i = 6; i < dh.header.size(); ++i) {
+				if (cn2 == 3) {
+					//if(cnt % 3 == 0 && cnt != 0)
+					//	std::cout << "[" << cnt <<", " << dh.header[i] << "], " << std::endl;
+					//else std::cout << "[" << cnt << ", " << dh.header[i] << "], ";
+					if (cnt % 3 == 0 && cnt != 0)
+						std::cout << dh.header[i] << ", " << std::endl;
+					else std::cout << dh.header[i] << ", ";
+					++cnt;
+					cn2 = 0;
+				}
+				if (i % 6 == 0)cn2 = -1;
+				++cn2;
+			}
+		}
+	}
+}
+
+namespace regtest{
+	void regtest_main() {
+		data::data_handler dh;
+		using namespace std::filesystem;
+		path p = current_path();
+		dh.read_moves(p.string() + "\\AAPL.csv");
+
+		dh.reparse_header(dh);
 	}
 }
 
@@ -78,9 +112,11 @@ namespace data_test {
 //test if list output is good
 
 int main(){
-	testUnorderedList(); //passed
+	//testUnorderedList(); //passed
 	//data_test::data_handling_test::testParsing(); //passed
 	//data_test::data_3_arg_test(); //passed
 	//date_test::date_to_number_test(); //passed
 	//date_test::number_to_date_test();
+	//data_test::data_handling_test::tempout();
+	regtest::regtest_main();
 }

@@ -77,6 +77,8 @@ namespace data {
 		/// osteam overload
 		/// </summary>
 		friend std::ostream& operator<<(std::ostream& os, const data & d);
+
+		inline double get_close() { return close; };
 	};
 	void reset_moves();
 

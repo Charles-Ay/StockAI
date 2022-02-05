@@ -14,6 +14,7 @@
 #include <iterator>     // ostream_operator
 #include <boost/tokenizer.hpp>
 #include <algorithm>
+#include <string>
 
 
 //class used to read data, split data
@@ -38,6 +39,9 @@ namespace data {
 		const double VALIDATION_SET_PERCENT = 0.05;
 
 	public:
+		std::string name;
+		std::string tick;
+
 		std::vector<std::string>header;
 		data_handler();
 		~data_handler();
@@ -64,6 +68,8 @@ namespace data {
 		std::vector<data*>* get_training_data();
 		std::vector<data*>* get_test_data();
 		std::vector<data*>* get_validation_data();
+
+		std::vector<data*> reparse_header(const data_handler &dh);
 	};
 }
 
